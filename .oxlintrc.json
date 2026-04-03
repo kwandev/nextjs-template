@@ -41,8 +41,11 @@
     "jsx-a11y/role-supports-aria-props": "warn",
 
     "import/no-anonymous-default-export": "warn",
+    "import/prefer-default-export": "off",
+    "import/consistent-type-specifier-style": "off",
+    "import/no-relative-parent-imports": "error",
 
-    "typescript/no-unused-vars": "warn",
+    "typescript/no-unused-vars": "error",
     "typescript/no-unused-expressions": "warn",
 
     "unicorn/filename-case": "off",

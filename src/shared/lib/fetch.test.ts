@@ -1,6 +1,5 @@
 import http from 'node:http';
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
-
 import { HttpError, api, createFetcher } from './fetch';
 
 let server: http.Server;
