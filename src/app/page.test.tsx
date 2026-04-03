@@ -1,21 +1,45 @@
-import { render, screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { cleanup, render, screen } from '@testing-library/react';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import Home from './page';
 
-describe('Home', () => {
-  it('페이지 제목이 렌더링된다', () => {
-    render(<Home />);
+vi.mock('@/shared/lib', () => ({
+  api: {
+    get: vi.fn().mockResolvedValue([
+      {
+        id: 1,
+        albumId: 1,
+        title: 'photo one',
+        thumbnailUrl: 'https://via.placeholder.com/150/1',
+        url: '',
+      },
+      {
+        id: 2,
+        albumId: 1,
+        title: 'photo two',
+        thumbnailUrl: 'https://via.placeholder.com/150/2',
+        url: '',
+      },
+    ]),
+  },
+}));
 
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
-      'To get started, edit the page.tsx file.',
-    );
+describe('Home', () => {
+  afterEach(cleanup);
+
+  it('페이지 제목이 렌더링된다', async () => {
+    const Page = await Home();
+    render(Page);
+
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Photos');
   });
 
-  it('Documentation 링크가 존재한다', () => {
-    render(<Home />);
+  it('사진 목록이 렌더링된다', async () => {
+    const Page = await Home();
+    render(Page);
 
-    const [link] = screen.getAllByRole('link', { name: 'Documentation' });
-    expect(link).toBeInTheDocument();
-    expect(link).toHaveAttribute('href', expect.stringContaining('nextjs.org/docs'));
+    const items = screen.getAllByRole('listitem');
+    expect(items).toHaveLength(2);
+    expect(screen.getByText('photo one')).toBeInTheDocument();
+    expect(screen.getByText('photo two')).toBeInTheDocument();
   });
 });
