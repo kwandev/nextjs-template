@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "oxlint",
     "format": "oxfmt --write .",
-    "format:check": "oxfmt --check ."
+    "format:check": "oxfmt --check .",
+    "prepare": "husky"
   },
   "dependencies": {
     "next": "16.2.2",
@@ -21,9 +22,20 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
     "oxfmt": "^0.43.0",
     "oxlint": "^1.58.0",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "oxfmt --write",
+      "oxlint"
+    ],
+    "*.{css,md,json}": [
+      "oxfmt --write"
+    ]
   }
 }
