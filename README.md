@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Boilerplate
 
-## Getting Started
+Next.js 16 + React 19 기반 보일러플레이트 프로젝트.
 
-First, run the development server:
+## 기술 스택
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+| 카테고리      | 도구                           |
+| ------------- | ------------------------------ |
+| 프레임워크    | Next.js 16, React 19           |
+| 언어          | TypeScript                     |
+| 스타일링      | Tailwind CSS v4                |
+| 폰트          | Pretendard (Variable)          |
+| 린터          | oxlint                         |
+| 포매터        | oxfmt                          |
+| 단위 테스트   | Vitest + React Testing Library |
+| E2E 테스트    | Playwright                     |
+| Git 훅        | husky + lint-staged            |
+| 패키지 매니저 | pnpm                           |
+
+## 프로젝트 구조
+
+[FSD (Feature-Sliced Design)](https://feature-sliced.design/) 아키텍처를 따른다.
+
+```
+src/
+├── app/          # Next.js App Router (라우팅, 레이아웃)
+├── widgets/      # 독립적인 UI 블록 조합
+├── features/     # 사용자 시나리오 단위 기능
+├── entities/     # 비즈니스 엔티티
+└── shared/       # 공유 유틸리티, UI 컴포넌트
+    └── lib/      # fetch 래퍼 등 범용 라이브러리
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 시작하기
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm install
+pnpm dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+http://localhost:3000 에서 확인.
 
-## Learn More
+## 스크립트
 
-To learn more about Next.js, take a look at the following resources:
+| 명령어              | 설명                       |
+| ------------------- | -------------------------- |
+| `pnpm dev`          | 개발 서버 실행             |
+| `pnpm build`        | 프로덕션 빌드              |
+| `pnpm start`        | 프로덕션 서버 실행         |
+| `pnpm lint`         | oxlint 린트 검사           |
+| `pnpm format`       | oxfmt 포매팅 적용          |
+| `pnpm format:check` | 포매팅 검사 (CI용)         |
+| `pnpm test`         | Vitest 단위 테스트 실행    |
+| `pnpm test:watch`   | Vitest watch 모드          |
+| `pnpm test:e2e`     | Playwright E2E 테스트 실행 |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 코드 품질
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+커밋 시 husky + lint-staged가 자동 실행된다.
 
-## Deploy on Vercel
+- JS/TS 파일: `oxfmt --write` + `oxlint`
+- CSS/MD/JSON 파일: `oxfmt --write`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 테스트
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **단위 테스트**: `src/**/*.test.{ts,tsx}` — Vitest + React Testing Library
+- **E2E 테스트**: `e2e/**/*.spec.ts` — Playwright
