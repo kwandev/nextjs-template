@@ -1,14 +1,7 @@
 import type { Metadata } from 'next';
-import localFont from 'next/font/local';
 import { QueryProvider } from '@/shared/providers';
 import './globals.css';
-
-const pretendard = localFont({
-  src: '../../node_modules/pretendard/dist/web/variable/woff2/PretendardVariable.woff2',
-  variable: '--font-pretendard',
-  display: 'swap',
-  weight: '45 920',
-});
+import { pretendard } from '@/shared/fonts';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -21,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={`${pretendard.variable} h-full antialiased`}>
+    <html lang="ko" className={`h-full antialiased ${pretendard.variable}`}>
       <body className="flex min-h-full flex-col">
         <QueryProvider>{children}</QueryProvider>
       </body>
