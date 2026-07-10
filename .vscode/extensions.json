@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "streetsidesoftware.code-spell-checker",
+    "oxc.oxc-vscode",
+    "bradlc.vscode-tailwindcss",
+    "vitest.explorer"
+  ]
+}
