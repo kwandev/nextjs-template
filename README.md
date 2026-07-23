@@ -41,6 +41,18 @@ pnpm dev
 
 http://localhost:3000 에서 확인.
 
+## 환경변수
+
+`.env.example`을 복사해 `.env.local`을 만든다. 값 검증은 `src/shared/config/env.ts`에서 처리한다.
+
+```bash
+cp .env.example .env.local
+```
+
+| 변수                       | 설명                                               |
+| -------------------------- | -------------------------------------------------- |
+| `NEXT_PUBLIC_API_BASE_URL` | 공개 API base URL (미설정 시 데모 엔드포인트 폴백) |
+
 ## 스크립트
 
 | 명령어              | 설명                       |
